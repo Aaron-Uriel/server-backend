@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS foods (
+    food_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+    f_name VARCHAR(25) NOT NULL,
+    price DECIMAL(18, 2) NOT NULL,
+    estimated_time_minutes TINYINT UNSIGNED DEFAULT NULL,
+    variant_group INTEGER UNSIGNED NOT NULL,
+    PRIMARY KEY (food_id)
+)
