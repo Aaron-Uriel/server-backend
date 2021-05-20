@@ -2,7 +2,7 @@
 Este es el backend que se usará para nuestro proyecto final y probablemente también se va a usar en un entorno real.
 
 ## Recomendaciones
-Como este programa tal vez use mucho la línea de comandos, lo mejor es que te instales [Visual Studio Code](https://code.visualstudio.com/Download) y [winget](https://www.microsoft.com/p/app-installer/9nblggh4nns1?ocid=9nblggh4nns1_ORSEARCH_Bing&rtc=1&activetab=pivot:overviewtab), son completamente opcionales pero facilitarán el uso del programa.
+Como este programa tal vez use mucho la línea de comandos, lo mejor es que te instales [Visual Studio Code](https://code.visualstudio.com/Download), [git](https://git-scm.com/downloads) y [winget](https://www.microsoft.com/p/app-installer/9nblggh4nns1?ocid=9nblggh4nns1_ORSEARCH_Bing&rtc=1&activetab=pivot:overviewtab), son opcionales pero encarecidamente recomendados.
 
 ### En caso de instalar VS Code
 Instalar rust-analyzer en VS Code te facilitaría mucho la edición de este código y también la detección de errores antes de siquiera compilar. Instálalo presionando ```Ctrl + P``` y pegando ```ext install matklad.rust-analyzer``` .
