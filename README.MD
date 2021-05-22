@@ -22,5 +22,5 @@ También puedes Descargarlo desde el apartado "Code" de color verde y descargarl
 
 ## Compilación
 Ejecutar el siguiente comando dentro de esta carpeta debería de compilarlo y ejecutarlo sin problemas.
-```cargo run --release```
+    ```cargo run --release```
 Puede llegar a tardar mucho la primera vez pero las próximas serán mas rápidas.

@@ -1,12 +1,24 @@
-use std::net::TcpListener;
+use std::net::{TcpListener, TcpStream};
+use std::io::prelude::*;
 
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:8080")
         .expect("Not possible to connect to localhost");
     
     for stream in listener.incoming() {
-        let stream = stream.unwrap();
+        let mut stream = stream.unwrap();
 
-        println!("Success");
+        handle_request(&mut stream);
     }
+}
+
+fn handle_request(stream: &mut TcpStream) {
+    let mut buffer = [0 as u8; 1024]; //1KB
+
+    let buffer_size = match stream.read(&mut buffer) {
+        Ok(stream_length) => stream_length,
+        Err(e) => panic!("{}", e)
+    };
+
+    println!("The request is: {}", String::from_utf8_lossy(&buffer[0..buffer_size]));
 }
