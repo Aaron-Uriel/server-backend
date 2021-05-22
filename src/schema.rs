@@ -35,6 +35,14 @@ table! {
     }
 }
 
+table! {
+    workers (worker_id) {
+        worker_id -> Unsigned<Integer>,
+        w_name -> Varchar,
+        w_password -> Binary,
+    }
+}
+
 joinable!(orders -> clients (client_id));
 joinable!(orders -> foods (food_id));
 joinable!(orders -> variants (variant_id));
@@ -44,4 +52,5 @@ allow_tables_to_appear_in_same_query!(
     foods,
     orders,
     variants,
+    workers,
 );
