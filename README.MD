@@ -18,6 +18,7 @@ También puedes Descargarlo desde el apartado "Code" de color verde y descargarl
 
 ## Requisitos de ejecución
 * Necesitas de tener mysql/mariadb correctamente configurado con tu usuario y contraseña ya puesto, ya con eso ahora necesitas poner tu usuario y contraseña en el archivo .env que está en esta carpeta.
+* La variable ```SERVER_IP``` contiene la ip (y el puerto) por donde se van a hacer las peticiones al programa, localhost (127.0.0.1) sirve solo para el propio dispositivo, si quieres que algún otro dispositivo que esté en la misma red pueda entrar necesitas encontrar la ip de tu dispositivo con el comando ```ipconfig``` para Windows o ```ifconfig | grep "inet " | grep -v 127.0.0.1``` para sistemas Unix, prueba con todas las ips que aparescan excepto localhost, en mi caso fue ```192.168.0.23```.
 * Para crear la base de datos sobre la que corre el programa necesitas teclear ```diesel setup```, debería crear una base de datos llamada "punto_de_venta" y ejecutar las migraciones (la tablas de la bd), si crea la bd vacía ejecuta ```diesel migration run```.
 
 ## Compilación

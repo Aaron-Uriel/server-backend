@@ -1,9 +1,19 @@
 use std::net::{TcpListener, TcpStream};
 use std::io::prelude::*;
 
+use dotenv::dotenv;
+use std::env;
+
 fn main() {
-    let listener = TcpListener::bind("127.0.0.1:8080")
-        .expect("Not possible to connect to localhost");
+    dotenv().ok();
+
+    let ip_address = match env::var("SERVER_IP") {
+        Ok(var) => var,
+        Err(e) => panic!("{}", e)
+    };
+
+    let listener = TcpListener::bind(ip_address)
+        .expect("Not possible to connect to selected ip");
     
     for stream in listener.incoming() {
         let mut stream = stream.unwrap();
