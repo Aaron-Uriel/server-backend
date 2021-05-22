@@ -7,7 +7,7 @@ Como este programa tal vez use mucho la línea de comandos, lo mejor es que te i
 ### En caso de instalar VS Code
 Instalar rust-analyzer en VS Code te facilitaría mucho la edición de este código y también la detección de errores antes de siquiera compilar. Instálalo presionando ```Ctrl + P``` y pegando ```sh
 ext install matklad.rust-analyzer
-```.
+```
 
 ## Primero que nada, ¿Cómo descargo el código xd?
 Usando git puedes hacer ```git clone https://github.com/Aaron-Uriel/server-backend.git``` desde tu terminal, esto creará una carpeta llamada server-backend, en la carpeta donde sea que estés por lo que es mejor que hagas habras la terminal en Documentos.
