@@ -21,4 +21,13 @@ fn handle_request(stream: &mut TcpStream) {
     };
 
     println!("The request is: {}", String::from_utf8_lossy(&buffer[0..buffer_size]));
+
+    let response = format!(
+        "HTTPS/1.1 200 OK\r\n\r\n",
+    );
+
+    match stream.write(response.as_bytes()) {
+        Ok(size) => println!("Written to HTTP stream successfully, {} bytes were written", size),
+        Err(e) => panic!("{}", e)
+    }
 }
