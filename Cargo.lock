@@ -47,6 +47,9 @@ dependencies = [
  "chrono",
  "diesel_derives",
  "mysqlclient-sys",
+ "num-bigint",
+ "num-integer",
+ "num-traits",
  "url",
 ]
 
@@ -164,6 +167,8 @@ dependencies = [
 name = "server-backend"
 version = "0.1.0"
 dependencies = [
+ "bigdecimal",
+ "chrono",
  "diesel",
  "dotenv",
 ]
