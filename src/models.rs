@@ -7,6 +7,11 @@ use crate::schema::{
 };
 use bigdecimal::BigDecimal;
 
+use serde::{
+    Serialize,
+    Deserialize
+};
+
 #[derive(Queryable, Debug)]
 pub struct Client {
     pub id: u32,
@@ -14,13 +19,13 @@ pub struct Client {
     pub arrival: NaiveDateTime
 }
 
-#[derive(Queryable, Debug)]
+#[derive(Queryable, Debug, Serialize)]
 pub struct Food {
-    pub id: u32,
+    pub id: u16,
     pub name: String,
     pub price: BigDecimal,
     pub est_time: Option<u8>,
-    pub var_group: u32
+    pub var_group: u8
 }
 
 #[derive(Insertable, Default)]
@@ -35,14 +40,14 @@ pub struct NewOrder {
     pub client_id: u32,
     pub food_id: u16,
     pub food_amount: u8,
-    pub variant_id: String
+    pub variant_id: u8
 }
 
 #[derive(Queryable, Debug)]
 pub struct Order {
     pub order_id: u32,
     pub client_id: u32,
-    pub food_id: u32,
+    pub food_id: u16,
     pub food_amount: u32,
     pub variant_id: String,
     pub is_finished: bool
@@ -50,7 +55,7 @@ pub struct Order {
 
 #[derive(Queryable)]
 pub struct Variant {
-    pub id: String,
+    pub id: u8,
     pub full_name: String,
-    pub group: u32
+    pub group: u8
 }

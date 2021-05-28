@@ -1,7 +1,7 @@
 pub mod resquests {
-    pub const Food: &str = "GET /food_list HTTPS/1.1";
-    pub const Variants: &str = "GET /variants_list HTTPS/1.1";
-    pub const Tables: &str = "GET /tables_table_list HTTPS/1.1";
+    pub const Food: &str = "GET /food_list HTTP/1.1\r\n";
+    pub const Variants: &str = "GET /variants_list HTTP/1.1\r\n";
+    pub const Tables: &str = "GET /tables_table_list HTTP/1.1\r\n";
 }
 
 pub mod returns {
