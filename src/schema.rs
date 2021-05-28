@@ -12,7 +12,7 @@ table! {
         f_name -> Varchar,
         price -> Decimal,
         estimated_time_minutes -> Nullable<Unsigned<Tinyint>>,
-        variant_group -> Unsigned<Tinyint>,
+        has_variants -> Bool,
     }
 }
 
@@ -38,7 +38,6 @@ table! {
     variants (v_id) {
         v_id -> Unsigned<Tinyint>,
         v_name -> Varchar,
-        v_group -> Unsigned<Tinyint>,
     }
 }
 
