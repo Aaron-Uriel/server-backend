@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS foods (
     f_name VARCHAR(25) NOT NULL,
     price DECIMAL(6, 2) NOT NULL,
     estimated_time_minutes TINYINT UNSIGNED DEFAULT NULL,
-    variant_group TINYINT UNSIGNED NOT NULL,
+    has_variants BOOLEAN NOT NULL,
     PRIMARY KEY (food_id)
 )
