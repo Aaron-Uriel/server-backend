@@ -1,3 +1,9 @@
+#[macro_use]
+extern crate diesel;
+
+mod schema;
+mod models;
+
 use std::net::{TcpListener, TcpStream};
 use std::io::prelude::*;
 
