@@ -40,10 +40,16 @@ pub fn insert_order(conn: &MysqlConnection, foods_to_order: Vec<models::Food>, c
         .expect(&format!("No se pudo insertar a la tabla de ordenes la comida del cliente {}", client.name));
 }
 
-pub fn get_variants_from_group(conn: &MysqlConnection, group_id: u8) -> Vec<models::Variant> {
+pub fn get_variants_vec(conn: &MysqlConnection) -> Vec<models::Variant> {
     use schema::variants::dsl::*;
 
-    variants.filter(v_group.eq(group_id))
-        .load::<models::Variant>(conn)
+    variants.load::<models::Variant>(conn)
         .expect("Impossible to get variants from db.")
+}
+
+pub fn get_tables_vec(conn: &MysqlConnection) -> Vec<models::Table> {
+    use schema::tables::dsl::*;
+
+    tables.load::<models::Table>(conn)
+        .expect("Impossible to get tables table from db.")
 }
