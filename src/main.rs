@@ -4,6 +4,11 @@ use std::io::prelude::*;
 use dotenv::dotenv;
 use std::env;
 
+use std::fs;
+
+mod consts;
+use consts::*;
+
 fn main() {
     dotenv().ok();
 
@@ -32,8 +37,19 @@ fn handle_request(stream: &mut TcpStream) {
 
     println!("The request is: {}", String::from_utf8_lossy(&buffer[0..buffer_size]));
 
+    let (return_code, filename) = if buffer.starts_with(resquests::Food.as_bytes()) {
+        (returns::Ok, "test.json")
+    } else {
+        (returns::NotFound, "test.json")
+    };
+
+    let contents = fs::read_to_string(filename).expect("File does not exist");
+
     let response = format!(
-        "HTTPS/1.1 200 OK\r\n\r\n",
+        "{}\r\nContent-Length: {}\r\n\r\n{}",
+        return_code,
+        contents.len(),
+        contents
     );
 
     match stream.write(response.as_bytes()) {
