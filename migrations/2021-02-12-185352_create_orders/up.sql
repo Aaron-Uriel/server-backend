@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS orders (
     client_id INTEGER UNSIGNED NOT NULL,
     food_id SMALLINT UNSIGNED NOT NULL,
     food_amount TINYINT UNSIGNED NOT NULL,
-    variant_id TINYINT NOT NULL,
+    variant_id TINYINT UNSIGNED NOT NULL,
     is_finished BOOLEAN DEFAULT FALSE NOT NULL,
     CONSTRAINT `client_name_fk`
         FOREIGN KEY (client_id) REFERENCES clients (client_id)

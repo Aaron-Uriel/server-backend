@@ -22,7 +22,7 @@ table! {
         client_id -> Unsigned<Integer>,
         food_id -> Unsigned<Smallint>,
         food_amount -> Unsigned<Tinyint>,
-        variant_id -> Tinyint,
+        variant_id -> Unsigned<Tinyint>,
         is_finished -> Bool,
     }
 }
@@ -36,7 +36,7 @@ table! {
 
 table! {
     variants (v_id) {
-        v_id -> Tinyint,
+        v_id -> Unsigned<Tinyint>,
         v_name -> Varchar,
         v_group -> Unsigned<Tinyint>,
     }
