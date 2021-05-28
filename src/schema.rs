@@ -22,7 +22,7 @@ table! {
         client_id -> Unsigned<Integer>,
         food_id -> Unsigned<Smallint>,
         food_amount -> Unsigned<Tinyint>,
-        variant_id -> Varchar,
+        variant_id -> Tinyint,
         is_finished -> Bool,
     }
 }
@@ -36,17 +36,9 @@ table! {
 
 table! {
     variants (v_id) {
-        v_id -> Varchar,
+        v_id -> Tinyint,
         v_name -> Varchar,
         v_group -> Unsigned<Tinyint>,
-    }
-}
-
-table! {
-    workers (worker_id) {
-        worker_id -> Unsigned<Integer>,
-        w_name -> Varchar,
-        w_password -> Binary,
     }
 }
 
@@ -61,5 +53,4 @@ allow_tables_to_appear_in_same_query!(
     orders,
     tables,
     variants,
-    workers,
 );
