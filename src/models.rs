@@ -25,7 +25,7 @@ pub struct Food {
     pub name: String,
     pub price: BigDecimal,
     pub est_time: Option<u8>,
-    pub var_group: u8
+    pub has_variants: bool
 }
 
 #[derive(Insertable, Default)]
@@ -53,9 +53,14 @@ pub struct Order {
     pub is_finished: bool
 }
 
-#[derive(Queryable)]
+#[derive(Queryable, Serialize)]
 pub struct Variant {
     pub id: u8,
-    pub full_name: String,
-    pub group: u8
+    pub full_name: String
+}
+
+#[derive(Queryable, Serialize)]
+pub struct Table {
+    id: u8,
+    is_occupied: bool
 }

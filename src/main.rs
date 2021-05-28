@@ -49,7 +49,16 @@ fn handle_request(stream: &mut TcpStream, conn: &diesel::MysqlConnection) {
     let (return_code, json_response) = if buffer.starts_with(resquests::Food.as_bytes()) {
         let food_list = mylib::get_food_vec(conn);
         (returns::Ok, serde_json::to_string(&food_list).unwrap())
-    } else {
+    } 
+    else if buffer.starts_with(resquests::Variants.as_bytes()) {
+        let variants_list = mylib::get_variants_vec(conn);
+        (returns::Ok, serde_json::to_string(&variants_list).unwrap())
+    }
+    else if buffer.starts_with(resquests::Tables.as_bytes()) {
+        let tables_list = mylib::get_tables_vec(conn);
+        (returns::Ok, serde_json::to_string(&tables_list).unwrap())
+    }
+    else {
         (returns::NotFound, String::from(""))
     };
 
