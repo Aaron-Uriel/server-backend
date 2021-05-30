@@ -62,8 +62,15 @@ fn handle_request(stream: &mut TcpStream, conn: &diesel::MysqlConnection) {
         (returns::NotFound, String::from(""))
     };
 
+    //Es el texto HTTP que se va a devolver
+    //HTTP exige que las lineas terminen con \r\n el \ adicional es
+    //para evitar que las tabulaciones a la izquierda también aparezcan xd
     let response = format!(
-        "{}\r\nContent-Length: {}\r\n\r\n{}",
+        "{}\r\n\
+         Content-type: application/json\r\n\
+         Content-Length: {}\r\n\
+         \r\n\
+         {}",
         return_code,
         json_response.len(),
         json_response

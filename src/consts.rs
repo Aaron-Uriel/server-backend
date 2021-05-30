@@ -5,6 +5,10 @@ pub mod resquests {
 }
 
 pub mod returns {
-    pub const Ok: &str = "HTTP/1.1 200 OK\r\n\r\n";
-    pub const NotFound: &str = "HTTP/1.1 404 NOT FOUND\r\n\r\n";
+    pub const Ok: &str = "HTTP/1.1 200 OK";
+    pub const NotFound: &str = "HTTP/1.1 404 NOT FOUND";
+}
+
+pub mod receives {
+    pub const Order: &str = "";
 }
