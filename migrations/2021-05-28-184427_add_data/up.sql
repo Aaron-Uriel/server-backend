@@ -1,7 +1,7 @@
 INSERT INTO variants (v_name)
-VALUES ("bistec"),
-       ("chorizo"),
-       ("pastor");
+VALUES ("Bistec"),
+       ("Chorizo"),
+       ("Pastor");
 
 INSERT INTO foods (f_name, price, estimated_time_minutes, has_variants)
 VALUES ("Taco", 10, 5, TRUE),
