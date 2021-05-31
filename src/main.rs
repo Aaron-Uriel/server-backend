@@ -13,9 +13,6 @@ type DbPool = r2d2::Pool<ConnectionManager<MysqlConnection>>;
 use dotenv::dotenv;
 use std::env;
 
-mod consts;
-use consts::*;
-
 mod mylib;
 
 #[get("/food_list")]
