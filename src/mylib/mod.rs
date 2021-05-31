@@ -3,21 +3,43 @@ use dotenv::dotenv;
 use std::env;
 use crate::*;
 
-pub fn create_connection() -> MysqlConnection {
+pub fn create_pool() -> DbPool {
     dotenv().ok();
 
     let database_url = env::var("DATABASE_URL")
         .expect("DATABASE_URL must be set");
     
-    MysqlConnection::establish(&database_url)
-        .expect(&format!("Error connecting to database: {}", database_url))
+    let manager = ConnectionManager::<MysqlConnection>::new(database_url);
+    r2d2::Pool::builder()
+        .build(manager)
+        .expect("Failed to create database pool")
 }
 
-pub fn get_food_vec(conn: &MysqlConnection) -> Vec<models::Food> {
+pub fn get_food_vec(conn: &MysqlConnection) -> Result<Vec<models::Food>, diesel::result::Error> {
     use schema::foods::dsl::*;
 
-    foods.load::<models::Food>(conn)
-        .expect("Error while getting food list from db")
+    let result = foods.load::<models::Food>(conn)
+        .expect("Error while getting food list from db");
+    
+    Ok(result)
+}
+
+pub fn get_variants_vec(conn: &MysqlConnection) -> Result<Vec<models::Variant>, diesel::result::Error> {
+    use schema::variants::dsl::*;
+
+    let result = variants.load::<models::Variant>(conn)
+        .expect("Impossible to get variants from db.");
+    
+    Ok(result)
+}
+
+pub fn get_tables_vec(conn: &MysqlConnection) -> Result<Vec<models::Table>, diesel::result::Error> {
+    use schema::tables::dsl::*;
+
+    let result = tables.load::<models::Table>(conn)
+        .expect("Impossible to get tables table from db.");
+    
+    Ok(result)
 }
 
 pub fn insert_order(conn: &MysqlConnection, foods_to_order: Vec<models::Food>, client: models::Client) {
@@ -38,18 +60,4 @@ pub fn insert_order(conn: &MysqlConnection, foods_to_order: Vec<models::Food>, c
         .values(order_data)
         .execute(conn)
         .expect(&format!("No se pudo insertar a la tabla de ordenes la comida del cliente {}", client.name));
-}
-
-pub fn get_variants_vec(conn: &MysqlConnection) -> Vec<models::Variant> {
-    use schema::variants::dsl::*;
-
-    variants.load::<models::Variant>(conn)
-        .expect("Impossible to get variants from db.")
-}
-
-pub fn get_tables_vec(conn: &MysqlConnection) -> Vec<models::Table> {
-    use schema::tables::dsl::*;
-
-    tables.load::<models::Table>(conn)
-        .expect("Impossible to get tables table from db.")
 }
