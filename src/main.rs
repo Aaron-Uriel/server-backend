@@ -20,12 +20,12 @@ async fn food_list(pool: web::Data<DbPool>) -> HttpResponse {
     let conn = pool.get()
         .expect("Could not connect to db with pool");
     
-    let food_vec = web::block(move || mylib::get_food_vec(&conn))
-        .await
-        .map_err(|e| {
-            eprintln!("{}", e);
-            HttpResponse::InternalServerError().finish()
-        });
+        let food_vec = web::block(move || mylib::get_food_vec(&conn))
+            .await
+            .map_err(|e| {
+                eprintln!("{}", e);
+                HttpResponse::InternalServerError().finish()
+            });
 
     match food_vec {
         Ok(vec) => HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap()),
@@ -38,12 +38,13 @@ async fn variants_list(pool: web::Data<DbPool>) -> HttpResponse {
     let conn = pool.get()
         .expect("Could not connect to db with pool");
     
-    let food_vec = web::block(move || mylib::get_variants_vec(&conn))
-        .await
-        .map_err(|e| {
-            eprintln!("{}", e);
-            HttpResponse::InternalServerError().finish()
-        });
+    let food_vec = 
+        web::block(move || mylib::get_variants_vec(&conn))
+            .await
+            .map_err(|e| {
+                eprintln!("{}", e);
+                HttpResponse::InternalServerError().finish()
+            });
 
     match food_vec {
         Ok(vec) => HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap()),
@@ -56,12 +57,13 @@ async fn tables_list(pool: web::Data<DbPool>) -> HttpResponse {
     let conn = pool.get()
         .expect("Could not connect to db with pool");
     
-    let food_vec = web::block(move || mylib::get_tables_vec(&conn))
-        .await
-        .map_err(|e| {
-            eprintln!("{}", e);
-            HttpResponse::InternalServerError().finish()
-        });
+    let food_vec = 
+        web::block(move || mylib::get_tables_vec(&conn))
+            .await
+            .map_err(|e| {
+                eprintln!("{}", e);
+                HttpResponse::InternalServerError().finish()
+            });
 
     match food_vec {
         Ok(vec) => HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap()),
@@ -74,12 +76,13 @@ async fn new_client(pool: web::Data<DbPool>, data: web::Json<models::NewClient>)
     let conn = pool.get()
         .expect("Impossible to connect to db");
 
-    let new_client = web::block(move || mylib::insert_client(&conn, data.into_inner()))
-        .await
-        .map_err(|e| {
-            eprintln!("{}", e);
-            HttpResponse::InternalServerError().finish()
-        });
+    let new_client = 
+        web::block(move || mylib::insert_client(&conn, data.into_inner()))
+            .await
+            .map_err(|e| {
+                eprintln!("{}", e);
+                HttpResponse::InternalServerError().finish()
+            });
     
     match new_client {
         Ok(client) => HttpResponse::Created().body(serde_json::to_string_pretty(&client).unwrap()),
