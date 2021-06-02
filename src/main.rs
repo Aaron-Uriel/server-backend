@@ -28,13 +28,8 @@ async fn food_list(pool: web::Data<DbPool>) -> HttpResponse {
         });
 
     match food_vec {
-        Ok(vec) => {
-            HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap())
-        },
-        Err(e) => {
-            HttpResponse::InternalServerError();
-            panic!("The the food vector should be returned, but something happened");
-        }
+        Ok(vec) => HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap()),
+        Err(e) => HttpResponse::InternalServerError().finish()
     }
 }
 
@@ -51,13 +46,8 @@ async fn variants_list(pool: web::Data<DbPool>) -> HttpResponse {
         });
 
     match food_vec {
-        Ok(vec) => {
-            HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap())
-        },
-        Err(e) => {
-            HttpResponse::InternalServerError();
-            panic!("The the food vector should be returned, but something happened");
-        }
+        Ok(vec) => HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap()),
+        Err(e) => HttpResponse::InternalServerError().finish()
     }
 }
 
@@ -74,13 +64,26 @@ async fn tables_list(pool: web::Data<DbPool>) -> HttpResponse {
         });
 
     match food_vec {
-        Ok(vec) => {
-            HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap())
-        },
-        Err(e) => {
-            HttpResponse::InternalServerError();
-            panic!("The the food vector should be returned, but something happened");
-        }
+        Ok(vec) => HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap()),
+        Err(e) => HttpResponse::InternalServerError().finish()
+    }
+}
+
+#[post("/new_client")]
+async fn new_client(pool: web::Data<DbPool>, data: web::Json<models::NewClient>) -> HttpResponse {
+    let conn = pool.get()
+        .expect("Impossible to connect to db");
+
+    let new_client = web::block(move || mylib::insert_client(&conn, data.into_inner()))
+        .await
+        .map_err(|e| {
+            eprintln!("{}", e);
+            HttpResponse::InternalServerError().finish()
+        });
+    
+    match new_client {
+        Ok(client) => HttpResponse::Created().body(serde_json::to_string_pretty(&client).unwrap()),
+        Err(e) => HttpResponse::InternalServerError().finish()
     }
 }
 
@@ -102,6 +105,7 @@ async fn main() -> std::io::Result<()>{
                 .service(food_list)
                 .service(tables_list)
                 .service(variants_list)
+                .service(new_client)
         }
     ).bind(ip_address)?
     .run()

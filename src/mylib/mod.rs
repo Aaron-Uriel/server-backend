@@ -42,6 +42,18 @@ pub fn get_tables_vec(conn: &MysqlConnection) -> Result<Vec<models::Table>, dies
     Ok(result)
 }
 
+pub fn insert_client(conn: &MysqlConnection, client: models::NewClient) -> Result<models::Client, diesel::result::Error> {
+    use schema::clients::dsl;
+
+    diesel::insert_into(dsl::clients)
+        .values(client)
+        .execute(conn)
+        .unwrap();
+    
+    dsl::clients.order(dsl::arrival.asc())
+        .first::<models::Client>(conn)
+}
+
 pub fn insert_order(conn: &MysqlConnection, foods_to_order: Vec<models::Food>, client: models::Client) {
     use schema::orders::dsl::*;
     
@@ -59,5 +71,5 @@ pub fn insert_order(conn: &MysqlConnection, foods_to_order: Vec<models::Food>, c
     diesel::insert_into(orders)
         .values(order_data)
         .execute(conn)
-        .expect(&format!("No se pudo insertar a la tabla de ordenes la comida del cliente {}", client.name));
+        .expect("No se pudo insertar a la tabla de ordenes la comida del cliente");
 }

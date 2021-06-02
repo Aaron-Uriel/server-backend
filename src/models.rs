@@ -12,11 +12,10 @@ use serde::{
     Deserialize
 };
 
-#[derive(Queryable, Debug)]
+#[derive(Queryable, Debug, Serialize)]
 pub struct Client {
     pub id: u32,
     pub table_id: u8,
-    pub name: String,
     pub arrival: NaiveDateTime
 }
 
