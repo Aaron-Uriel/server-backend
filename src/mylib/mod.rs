@@ -50,7 +50,7 @@ pub fn insert_client(conn: &MysqlConnection, client: models::NewClient) -> Resul
         .execute(conn)
         .unwrap();
     
-    dsl::clients.order(dsl::arrival.asc())
+    dsl::clients.order(dsl::arrival.desc())
         .first::<models::Client>(conn)
 }
 
