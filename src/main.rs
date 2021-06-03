@@ -29,7 +29,7 @@ async fn food_list(pool: web::Data<DbPool>) -> HttpResponse {
 
     match food_vec {
         Ok(vec) => HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap()),
-        Err(e) => HttpResponse::InternalServerError().finish()
+        Err(_) => HttpResponse::InternalServerError().finish()
     }
 }
 
@@ -48,7 +48,7 @@ async fn variants_list(pool: web::Data<DbPool>) -> HttpResponse {
 
     match food_vec {
         Ok(vec) => HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap()),
-        Err(e) => HttpResponse::InternalServerError().finish()
+        Err(_) => HttpResponse::InternalServerError().finish()
     }
 }
 
@@ -67,7 +67,7 @@ async fn tables_list(pool: web::Data<DbPool>) -> HttpResponse {
 
     match food_vec {
         Ok(vec) => HttpResponse::Ok().body(serde_json::to_string_pretty(&vec).unwrap()),
-        Err(e) => HttpResponse::InternalServerError().finish()
+        Err(_) => HttpResponse::InternalServerError().finish()
     }
 }
 
@@ -86,7 +86,7 @@ async fn new_client(pool: web::Data<DbPool>, data: web::Json<models::NewClient>)
     
     match new_client {
         Ok(client) => HttpResponse::Created().body(serde_json::to_string_pretty(&client).unwrap()),
-        Err(e) => HttpResponse::InternalServerError().finish()
+        Err(_) => HttpResponse::InternalServerError().finish()
     }
 }
 

@@ -48,8 +48,8 @@ pub struct Order {
     pub order_id: u32,
     pub client_id: u32,
     pub food_id: u16,
-    pub food_amount: u32,
-    pub variant_id: String,
+    pub food_amount: u8,
+    pub variant_id: u8,
     pub is_finished: bool
 }
 
