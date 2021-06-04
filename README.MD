@@ -14,8 +14,11 @@ También puedes Descargarlo desde el apartado "Code" de color verde y descargarl
 
 ## Requisitos de compilación
 * Para compilar este proyecto se necesita de el lenguaje de programación Rust el cual puedes instalar desde [aquí](https://rustup.rs/).
+* Para poder compilar todo el proyecto o bien instalas las [Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16) de Visual Studio, que pesan mas de 5GB o bien instalar el toolchain de gnu en rust con los comandos ```rustup toolchain install stable-x86_64-pc-windows-gnu``` y ```rustup default stable-x86_64-pc-windows-gnu```.
 * Para poder crear la base de datos de forma mas automática se necesita de diesel_cli, lo podemos instalar con: ```cargo install diesel_cli --no-default-features --features mysql``` (para este paso ya debiste de haber instalado correctamente Rust, en caso de no reconocer a cargo como un programa probablemente hay algún error con la variable PATH, usualmente el instalador te lo menciona al final).
 * Se necesita de mysql/mariadb el cual puedes instalar desde winget o sus páginas oficiales, el resto de dependencias serán instaladas por cargo (el gestor de paquetes de rust).
+* En caso de usar el toolchain de gnu y dar un error relacionado a ld.exe o gcc.exe necesitas descargar [MingGW64](http://win-builds.org/doku.php/download_and_installation_from_windows) y agregar al PATH la carpeta bin de lo que te haya instalado. 
+* En caso de que te apareza un error relacionado con "mysql" o "mysqlclient" se necesita que el compilador pueda acceder al comando ```mysql_config``` que deberá de estar en alguna de las carpetas relacionadas con mysql/mariadb, si existe se debe de agregar al PATH manualmente (su carpeta, no el .exe directamente)
 
 ## Requisitos de ejecución
 * Necesitas de tener mysql/mariadb correctamente configurado con tu usuario y contraseña ya puesto (Introducir el comando sql, posteriormente root -u -pass y después la contraseña), ya con eso ahora necesitas poner tu usuario y contraseña en el archivo .env que está en esta carpeta.
