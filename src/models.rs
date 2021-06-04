@@ -34,7 +34,7 @@ pub struct NewClient {
     pub table_id: u8
 }
 
-#[derive(Insertable, Debug, Default)]
+#[derive(Insertable, Debug, Deserialize)]
 #[table_name="orders"]
 pub struct NewOrder {
     pub client_id: u32,

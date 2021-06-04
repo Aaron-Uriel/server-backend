@@ -54,22 +54,10 @@ pub fn insert_client(conn: &MysqlConnection, client: models::NewClient) -> Resul
         .first::<models::Client>(conn)
 }
 
-pub fn insert_order(conn: &MysqlConnection, foods_to_order: Vec<models::Food>, client: models::Client) {
+pub fn insert_order(conn: &MysqlConnection, orders_vector: Vec<models::NewOrder>) -> Result<usize, diesel::result::Error> {
     use schema::orders::dsl::*;
-    
-    let mut order_data: Vec<models::NewOrder> = Vec::new();
-
-    for food in foods_to_order.iter() {
-        order_data.push(models::NewOrder {
-            client_id: client.id,
-            food_id: food.id,
-            food_amount: 1,
-            variant_id: 1 //Esto se debe editar después
-        });
-    }
 
     diesel::insert_into(orders)
-        .values(order_data)
+        .values(orders_vector)
         .execute(conn)
-        .expect("No se pudo insertar a la tabla de ordenes la comida del cliente");
 }
