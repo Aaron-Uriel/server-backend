@@ -52,7 +52,7 @@ async fn variants_list(pool: web::Data<DbPool>) -> HttpResponse {
     }
 }
 
-#[get("/tables_table_list")]
+#[get("/tables_list")]
 async fn tables_list(pool: web::Data<DbPool>) -> HttpResponse {
     let conn = pool.get()
         .expect("Could not connect to db with pool");
