@@ -15,7 +15,7 @@ use serde::{
 #[derive(Queryable, Debug, Serialize)]
 pub struct Client {
     pub id: u32,
-    pub table_id: u8,
+    pub table_id: Option<u8>,
     pub arrival: NaiveDateTime
 }
 
@@ -31,7 +31,7 @@ pub struct Food {
 #[derive(Insertable, Default, Deserialize)]
 #[table_name="clients"]
 pub struct NewClient {
-    pub table_id: u8
+    pub table_id: Option<u8>
 }
 
 #[derive(Insertable, Debug, Deserialize)]

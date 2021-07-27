@@ -1,7 +1,7 @@
 table! {
     clients (client_id) {
         client_id -> Unsigned<Integer>,
-        table_id -> Unsigned<Tinyint>,
+        table_id -> Nullable<Unsigned<Tinyint>>,
         arrival -> Timestamp,
     }
 }
